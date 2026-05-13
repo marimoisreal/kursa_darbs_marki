@@ -19,98 +19,53 @@ namespace kursa_darbs
         {
 
         }
-        private void valstisToolStripMenuItem_Click(object sender, EventArgs e)
+        // realizeta tab funkcija 
+        private void OpenFormInTab(Form childForm, string tabTitle)
         {
-            foreach (Form openForm in this.MdiChildren)
+            foreach (TabPage tab in tabControl1.TabPages)
             {
-                if (openForm.GetType() == typeof(FormCountries))
+                if (tab.Text == tabTitle)
                 {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
+                    // atgriez tab
+                    tabControl1.SelectTab(tab);
                     return;
                 }
             }
-            FormCountries stampsForm = new FormCountries();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+
+            TabPage newTab = new TabPage();
+            newTab.Text = tabTitle;
+            newTab.Name = "tab_" + tabTitle; // pieskir nosaukumu 
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill; // veido pilno lauku
+            newTab.Controls.Add(childForm);
+            tabControl1.TabPages.Add(newTab);
+            childForm.Show();
+            tabControl1.SelectedTab = newTab;
+        }
+        private void valstisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+            OpenFormInTab(new FormCountries(), "Valstis");
         }
 
         private void tēmasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in this.MdiChildren)
-            {
-                if (openForm.GetType() == typeof(FormThemes))
-                {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
-                    return;
-                }
-            }
-            FormThemes stampsForm = new FormThemes();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+            OpenFormInTab(new FormThemes(), "Tēmas");
         }
 
         private void markiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in this.MdiChildren)
-            {
-                if (openForm.GetType() == typeof(FormStamps))
-                {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
-                    return;
-                }
-            }
-            FormStamps stampsForm = new FormStamps();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+            OpenFormInTab(new FormStamps(), "Postmarki");
         }
         private void kolekcionariToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in this.MdiChildren)
-            {
-                if (openForm.GetType() == typeof(FormCollectors))
-                {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
-                    return;
-                }
-            }
-            FormCollectors stampsForm = new FormCollectors();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+            OpenFormInTab(new FormCollectors(), "Kolekcionāri");
         }
 
         private void kolekcijuPārvaldībaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in this.MdiChildren)
-            {
-                if (openForm.GetType() == typeof(FormCollectionManagment))
-                {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
-                    return;
-                }
-            }
-            FormCollectionManagment stampsForm = new FormCollectionManagment();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+            OpenFormInTab(new FormCollectionManagment(), "Kolekciju pārvaldība");
         }
 
         private void logiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,21 +75,25 @@ namespace kursa_darbs
 
         private void kolekcijasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in this.MdiChildren)
+            OpenFormInTab(new FormCollectionViews(), "Kolekcijas");
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aizvērtAktīvoCilniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.TabPages.Count > 0)
             {
-                if (openForm.GetType() == typeof(FormCollectionViews))
-                {
-                    openForm.Activate();
-                    if (openForm.WindowState == FormWindowState.Minimized)
-                    {
-                        openForm.WindowState = FormWindowState.Normal;
-                    }
-                    return;
-                }
+                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
             }
-            FormCollectionViews stampsForm = new FormCollectionViews();
-            stampsForm.MdiParent = this;
-            stampsForm.Show();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

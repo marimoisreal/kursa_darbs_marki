@@ -36,8 +36,11 @@
             this.markiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kolekcionariToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kolekcijuPārvaldībaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kolekcijasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.logiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.npgsqlConnection1 = new Npgsql.NpgsqlConnection();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.aizvērtAktīvoCilniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +53,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MdiWindowListItem = this.logiToolStripMenuItem;
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(879, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -67,14 +70,14 @@
             // valstisToolStripMenuItem
             // 
             this.valstisToolStripMenuItem.Name = "valstisToolStripMenuItem";
-            this.valstisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.valstisToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.valstisToolStripMenuItem.Text = "Valstis";
             this.valstisToolStripMenuItem.Click += new System.EventHandler(this.valstisToolStripMenuItem_Click);
             // 
             // tēmasToolStripMenuItem
             // 
             this.tēmasToolStripMenuItem.Name = "tēmasToolStripMenuItem";
-            this.tēmasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tēmasToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.tēmasToolStripMenuItem.Text = "Tēmas";
             this.tēmasToolStripMenuItem.Click += new System.EventHandler(this.tēmasToolStripMenuItem_Click);
             // 
@@ -110,14 +113,6 @@
             this.kolekcijuPārvaldībaToolStripMenuItem.Text = "Kolekciju pārvaldība";
             this.kolekcijuPārvaldībaToolStripMenuItem.Click += new System.EventHandler(this.kolekcijuPārvaldībaToolStripMenuItem_Click);
             // 
-            // logiToolStripMenuItem
-            // 
-            this.logiToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.logiToolStripMenuItem.Name = "logiToolStripMenuItem";
-            this.logiToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.logiToolStripMenuItem.Text = "Logi";
-            this.logiToolStripMenuItem.Click += new System.EventHandler(this.logiToolStripMenuItem_Click);
-            // 
             // kolekcijasToolStripMenuItem1
             // 
             this.kolekcijasToolStripMenuItem1.Name = "kolekcijasToolStripMenuItem1";
@@ -125,11 +120,46 @@
             this.kolekcijasToolStripMenuItem1.Text = "Kolekcijas";
             this.kolekcijasToolStripMenuItem1.Click += new System.EventHandler(this.kolekcijasToolStripMenuItem1_Click);
             // 
+            // logiToolStripMenuItem
+            // 
+            this.logiToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.logiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aizvērtAktīvoCilniToolStripMenuItem});
+            this.logiToolStripMenuItem.Name = "logiToolStripMenuItem";
+            this.logiToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.logiToolStripMenuItem.Text = "Logi";
+            this.logiToolStripMenuItem.Click += new System.EventHandler(this.logiToolStripMenuItem_Click);
+            // 
+            // npgsqlConnection1
+            // 
+            this.npgsqlConnection1.ProvideClientCertificatesCallback = null;
+            this.npgsqlConnection1.ProvidePasswordCallback = null;
+            this.npgsqlConnection1.UserCertificateValidationCallback = null;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 24);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(702, 574);
+            this.tabControl1.TabIndex = 3;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // aizvērtAktīvoCilniToolStripMenuItem
+            // 
+            this.aizvērtAktīvoCilniToolStripMenuItem.Name = "aizvērtAktīvoCilniToolStripMenuItem";
+            this.aizvērtAktīvoCilniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aizvērtAktīvoCilniToolStripMenuItem.Text = "Aizvērt aktīvo cilni";
+            this.aizvērtAktīvoCilniToolStripMenuItem.Click += new System.EventHandler(this.aizvērtAktīvoCilniToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 677);
+            this.BackColor = System.Drawing.Color.SpringGreen;
+            this.ClientSize = new System.Drawing.Size(702, 598);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -155,6 +185,9 @@
         private System.Windows.Forms.ToolStripMenuItem kolekcijuPārvaldībaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kolekcijasToolStripMenuItem1;
+        private Npgsql.NpgsqlConnection npgsqlConnection1;
+        private System.Windows.Forms.ToolStripMenuItem aizvērtAktīvoCilniToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
 

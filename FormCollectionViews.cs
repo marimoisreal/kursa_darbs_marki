@@ -22,11 +22,12 @@ namespace kursa_darbs
             conn = new NpgsqlConnection(connString);
             try
             {
+                // sql pakartots pieprasijums, samainot kolonnam nosaukumus 
                 string sql = @"select c.collection_id, c.name AS ""Kolekcijas nosaukums"", 
-                                      cl.name || ' ' || cl.surname AS ""Īpašnieks"", 
-                                      c.description AS ""Apraksts""
-                               from collections c
-                               join collectors cl on c.collector_id = cl.collector_id";
+                             cl.name || ' ' || cl.surname AS ""Īpašnieks"", 
+                             c.description AS ""Apraksts"" 
+                             from collections c
+                             join collectors cl on c.collector_id = cl.collector_id";
 
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -35,6 +36,10 @@ namespace kursa_darbs
                 dataGridView1.DataSource = dt;
                 dataGridView1.Columns["collection_id"].Visible = false; 
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.ReadOnly = true;
+  
             }
             catch (Exception ex)
             {
@@ -51,15 +56,16 @@ namespace kursa_darbs
                 LoadStampsInCollection(selectedId);
             }
         }
+
         private void LoadStampsInCollection(int colId)
         {
             try
             {
                 // postmarkas tabulu saistitam ar saistibas tabulu
                 string sql = @"select s.name as ""Markas nosaukums"", 
-                                      cs.condition as ""Stāvoklis"", 
-                                      cs.added_at_date as ""Pievienošanas datums"", 
-                                      cs.added_at_time as ""Laiks""
+                               cs.condition as ""Stāvoklis"", 
+                               cs.added_at_date as ""Pievienošanas datums"", 
+                               cs.added_at_time as ""Laiks""
                                from collections_stamps cs
                                join stamps s on cs.stamp_id = s.stamp_id
                                where cs.collection_id = @id";
@@ -70,7 +76,7 @@ namespace kursa_darbs
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
+                // aizpildam kolonnu ar postmarkiem
                 dataGridView2.DataSource = dt;
                 dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }

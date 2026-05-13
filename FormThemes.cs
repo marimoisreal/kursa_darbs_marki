@@ -238,7 +238,7 @@ namespace kursa_darbs
                         catch (PostgresException ex)
                         {
 
-                            MessageBox.Show($"Kļūda dzēšot no datubāzes: {ex.Message}");
+                            MessageBox.Show($"{ex.Message}");
 
                         }
                         finally
