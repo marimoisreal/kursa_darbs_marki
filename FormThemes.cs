@@ -109,11 +109,11 @@ namespace kursa_darbs
 
                 if (result != null && result != DBNull.Value)
                 {
-                    label1.Text = result.ToString(); // pieņemot, ka tev ir label1 aprakstam
+                    textBox1.Text = result.ToString(); // pieņemot, ka tev ir label1 aprakstam
                 }
                 else
                 {
-                    label1.Text = "Nav apraksta";
+                    textBox1.Text = "";
                 }
             }
         }
@@ -205,10 +205,6 @@ namespace kursa_darbs
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -237,7 +233,7 @@ namespace kursa_darbs
 
                             // if in database all is ok, remove from screen on table 
                             treeView1.SelectedNode.Remove();
-                            label1.Text = ""; // clearing description 
+                            textBox1.Text = ""; // clearing description 
                         }
                         catch (PostgresException ex)
                         {
@@ -260,6 +256,55 @@ namespace kursa_darbs
             else
             {
                 MessageBox.Show("Lūdzu, izvēlieties tēmu, kuru vēlaties dzēst.");
+            }
+        }
+        // pievienot jaunu tēmu
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TreeNode tn = new TreeNode();
+            tn.Text = "new";
+
+            treeView1.Nodes.Add(tn);
+            treeView1.SelectedNode = tn;
+            tn.BeginEdit();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null && treeView1.SelectedNode.Name != "")
+            {
+                try
+                {
+                    int id = Convert.ToInt32(treeView1.SelectedNode.Name);
+
+                    string updateQuery = "update themes set description = @desc where theme_id = @id";
+                    NpgsqlCommand cmdUpdate = new NpgsqlCommand(updateQuery, conn);
+
+                    cmdUpdate.Parameters.AddWithValue("@desc", textBox1.Text);
+                    cmdUpdate.Parameters.AddWithValue("@id", id);
+
+                    if (conn.State == ConnectionState.Closed) conn.Open();
+                    cmdUpdate.ExecuteNonQuery();
+
+                    MessageBox.Show("Apraksts veiksmīgi saglabāts!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open) conn.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lūdzu, izvēlieties tēmu (noklikšķiniet uz tās), lai saglabātu aprakstu.");
             }
         }
     }

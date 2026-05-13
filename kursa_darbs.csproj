@@ -89,6 +89,12 @@
     <Compile Include="FormCollectionManagment.Designer.cs">
       <DependentUpon>FormCollectionManagment.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCollectionViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCollectionViews.Designer.cs">
+      <DependentUpon>FormCollectionViews.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCollectors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCollectionManagment.resx">
       <DependentUpon>FormCollectionManagment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCollectionViews.resx">
+      <DependentUpon>FormCollectionViews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCollectors.resx">
       <DependentUpon>FormCollectors.cs</DependentUpon>

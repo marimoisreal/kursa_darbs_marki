@@ -117,5 +117,24 @@ namespace kursa_darbs
         {
 
         }
+
+        private void kolekcijasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (Form openForm in this.MdiChildren)
+            {
+                if (openForm.GetType() == typeof(FormCollectionViews))
+                {
+                    openForm.Activate();
+                    if (openForm.WindowState == FormWindowState.Minimized)
+                    {
+                        openForm.WindowState = FormWindowState.Normal;
+                    }
+                    return;
+                }
+            }
+            FormCollectionViews stampsForm = new FormCollectionViews();
+            stampsForm.MdiParent = this;
+            stampsForm.Show();
+        }
     }
 }

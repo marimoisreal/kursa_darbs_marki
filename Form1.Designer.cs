@@ -37,6 +37,7 @@
             this.kolekcionariToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kolekcijuPārvaldībaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kolekcijasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,14 +67,14 @@
             // valstisToolStripMenuItem
             // 
             this.valstisToolStripMenuItem.Name = "valstisToolStripMenuItem";
-            this.valstisToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.valstisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.valstisToolStripMenuItem.Text = "Valstis";
             this.valstisToolStripMenuItem.Click += new System.EventHandler(this.valstisToolStripMenuItem_Click);
             // 
             // tēmasToolStripMenuItem
             // 
             this.tēmasToolStripMenuItem.Name = "tēmasToolStripMenuItem";
-            this.tēmasToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.tēmasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tēmasToolStripMenuItem.Text = "Tēmas";
             this.tēmasToolStripMenuItem.Click += new System.EventHandler(this.tēmasToolStripMenuItem_Click);
             // 
@@ -82,7 +83,8 @@
             this.kolekcijasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.markiToolStripMenuItem,
             this.kolekcionariToolStripMenuItem,
-            this.kolekcijuPārvaldībaToolStripMenuItem});
+            this.kolekcijuPārvaldībaToolStripMenuItem,
+            this.kolekcijasToolStripMenuItem1});
             this.kolekcijasToolStripMenuItem.Name = "kolekcijasToolStripMenuItem";
             this.kolekcijasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.kolekcijasToolStripMenuItem.Text = "Kolekcijas";
@@ -116,6 +118,13 @@
             this.logiToolStripMenuItem.Text = "Logi";
             this.logiToolStripMenuItem.Click += new System.EventHandler(this.logiToolStripMenuItem_Click);
             // 
+            // kolekcijasToolStripMenuItem1
+            // 
+            this.kolekcijasToolStripMenuItem1.Name = "kolekcijasToolStripMenuItem1";
+            this.kolekcijasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.kolekcijasToolStripMenuItem1.Text = "Kolekcijas";
+            this.kolekcijasToolStripMenuItem1.Click += new System.EventHandler(this.kolekcijasToolStripMenuItem1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +154,7 @@
         private System.Windows.Forms.ToolStripMenuItem kolekcionariToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kolekcijuPārvaldībaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kolekcijasToolStripMenuItem1;
     }
 }
 

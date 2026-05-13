@@ -28,6 +28,7 @@ namespace kursa_darbs
 
             dataGridView1.DataSource = cart;
             dataGridView1.Columns["stamp_id"].Visible = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void FormCollectionManagment_Load(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace kursa_darbs
         {
 
         }
-        // kolekcijas nisaukums 
+        // kolekcijas nosaukums 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -121,30 +122,31 @@ namespace kursa_darbs
                     NpgsqlCommand cmdCol = new NpgsqlCommand(query, conn, transaction);
                     cmdCol.Parameters.AddWithValue("@c_id", Convert.ToInt32(comboBox1.SelectedValue));
                     cmdCol.Parameters.AddWithValue("@name", textBox1.Text);
-                    cmdCol.Parameters.AddWithValue("@desc", textBox2.Text);
+                    cmdCol.Parameters.AddWithValue("@descr", textBox2.Text);
 
                     // getting new collection ID
                     int newColId = Convert.ToInt32(cmdCol.ExecuteScalar());
 
-                    string queryStamps = @"INSERT INTO collections_stamps (collection_id, stamp_id, condition) 
-                                       VALUES (@col_id, @st_id, @cond)";
+                    string queryStamps = @"insert into collections_stamps (collection_id, stamp_id, added_at_date, added_at_time, condition) values (@col_id, @st_id, @d, @t, @cond)";
 
                     foreach (DataRow row in cart.Rows)
                     {
                         NpgsqlCommand cmdSt = new NpgsqlCommand(queryStamps, conn, transaction);
-                        cmdSt.Parameters.AddWithValue("@col_id", newColId);         // Тот самый новый ID коллекции
-                        cmdSt.Parameters.AddWithValue("@st_id", row["stamp_id"]);   // ID марки из корзины
-                        cmdSt.Parameters.AddWithValue("@cond", row["condition"]);   // Состояние из корзины
+                        cmdSt.Parameters.AddWithValue("@col_id", newColId);         // новый айди из коллекции
+                        cmdSt.Parameters.AddWithValue("@st_id", row["stamp_id"]);   // айди марки из корзины
+                        cmdSt.Parameters.AddWithValue("@d", DateTime.Now.Date);
+                        cmdSt.Parameters.AddWithValue("@t", new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second));
+                        cmdSt.Parameters.AddWithValue("@cond", row["condition"]);   // состояние из корзины
 
-                        cmdSt.ExecuteNonQuery(); // Отправляем строку в базу
+                        cmdSt.ExecuteNonQuery(); // отправляем строку в базу
                     }
 
-                    // ШАГ В: Если мы дошли до сюда, значит ошибок не было. Подтверждаем транзакцию!
+                    // if no errors we accept transaction
                     transaction.Commit();
 
                     MessageBox.Show("Kolekcija veiksmīgi saglabāta!");
 
-                    // Очищаем форму для ввода следующей коллекции
+                    // clear form for the next 
                     textBox1.Text = "";
                     textBox2.Text = "";
                     cart.Rows.Clear();

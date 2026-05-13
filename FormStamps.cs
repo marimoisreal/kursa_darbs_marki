@@ -100,5 +100,12 @@ namespace kursa_darbs
                 bs.RemoveCurrent();
             }
         }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Lūdzu, ievadiet pareizu skaitļa formātu! \nJūs varat izmantot, piemēram, komatu!",
+                "Dattu ievades kļūda",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            e.ThrowException = false;
+        }
     }
 }
